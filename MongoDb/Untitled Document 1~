@@ -1,0 +1,24 @@
+Prerequisites
+Install openSSH on your Remote systems
+
+sudo apt-get install openssh-server
+
+# Install cluster SSH
+
+sudo apt-get install clusterssh
+
+
+
+
+sudo nano /etc/clusters
+
+clusters = testcluster
+testcluster = ubuntu@52.91.20.168
+
+cssh -l ubuntu -o "-i avinashVirginia.pem.txt" testcluster
+
+To connect to EC2 client:
+
+ssh-add avinashVirginia.pem.txt
+chmod 400 avinashVirginia.pem.txt
+ssh -i avinashVirginia.pem.txt ubuntu@52.91.20.168

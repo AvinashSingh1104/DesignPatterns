@@ -1,0 +1,36 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="compilemongotest" >
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+		<classpath>
+			<pathelement path="lib/mongo.jar" /> 
+		</classpath>
+	</javac>
+    </target>
+
+    <target name="testmongojar" depends="compilemongotest">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/MongoEvaluation.jar" basedir="build/classes">
+		<zipgroupfileset dir="lib" includes="mongo.jar" />
+            <manifest>
+                <attribute name="Main-Class" value="MongoEvaluation"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runmongotest" depends="testmongojar">
+        <java jar="build/jar/MongoEvaluation.jar" fork="true"/>
+    </target>
+
+
+</project>

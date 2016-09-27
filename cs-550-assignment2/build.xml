@@ -1,0 +1,25 @@
+<project default="run">
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jarnode" depends="compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/NodeClass.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="NodeClass"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runnode" depends="jarnode">
+        <java jar="build/jar/NodeClass.jar" fork="true"/>
+    </target>
+
+</project>

@@ -1,0 +1,46 @@
+Steps Done to Experiment on EC2 amazon :
+
+1.created 1 t2.micro instances on Amazon EC2.
+
+2.Connect to instance :
+ i)Go to the location where pem file is downloaded & execute below command:
+
+chmod 400 avinashVirginia.pem.txt
+ssh -i avinashVirginia.pem.txt ubuntu@54.152.3.151
+
+3. To transfer the Workspace(redish-test ) & scripts (java_ant_redis_installation.sh) , I used filezile to the Awz instance.
+
+4. Install Java, ant, redis by running running below command
+ ./java_ant_redis_installation.sh
+
+4. Create image of the instance.
+
+5. Create 16 m3.medium ondemand instances from image.
+
+6. To conect to all the 16 instances together, I used cluster SSH
+
+	steps to install cluster shh on our machine
+
+		sudo apt-get install openssh-server
+		sudo apt-get install clusterssh
+
+7. To open all instances together by cluster ssh run below commands
+
+ sudo nano /etc/clusters
+ 
+clusters = testcluster
+testcluster = ubuntu@52.91.20.168
+
+add all 16 instance ips to testcluster like ubuntu@52.91.20.168
+
+cssh -l ubuntu -o "-i avinashVirginia.pem.txt" testcluster
+
+8. Above will open a cluster command window & 16 instance on different terminal.
+
+9.On Cluster command window now execute the scripts
+  	cd /home/ubuntu/redish-test/src
+	javac EvaluateRedis.java
+	java EvaluateRedis
+  
+After running we will get times in milliseconds for each operations PUT,GET,DELETE.
+

@@ -1,0 +1,20 @@
+keyValueSize=100000
+
+numberOfInstance=1
+
+host1 = 192.168.1.107:27017
+host2 = localhost:27017
+host3 = localhost:27017
+host4 = localhost:27017
+host5 = localhost:27017
+host6 = localhost:27017
+host7 = localhost:27017
+host8 = localhost:27017
+host9 = localhost:27017
+host10 = localhost:27017
+host11= localhost:27017
+host12= localhost:27017
+host13= localhost:27017
+host14 = localhost:27017
+host15 = localhost:27017
+host16 = localhost:27017

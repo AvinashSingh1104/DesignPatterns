@@ -1,0 +1,36 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="compileredistest" >
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+		<classpath>
+			<pathelement path="lib/jedis-2.8.0.jar" /> 
+		</classpath>
+	</javac>
+    </target>
+
+    <target name="testredisjar" depends="compileredistest">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/RedisEvaluation.jar" basedir="build/classes">
+		<zipgroupfileset dir="lib" includes="jedis-2.8.0.jar" />
+            <manifest>
+                <attribute name="Main-Class" value="EvaluateRedis"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runredistest" depends="testredisjar">
+        <java jar="build/jar/RedisEvaluation.jar" fork="true"/>
+    </target>
+
+
+</project>
